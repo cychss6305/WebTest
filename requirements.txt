@@ -4,4 +4,3 @@ bs4
 jieba
 google-api-python-client
 Flask
-monpa
