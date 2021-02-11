@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>API</title>
+</head>
+<body>
+    <p><a href="Tele">1.電話驗證</a></p>
+    <p><a href="https://b659ef6290ae.ngrok.io">3.GoogleMap搜尋</a></p>
+    <form method="post">
+        <input type="text" name="CaseCompanyNum">輸入案件編號<br>
+		<input type="text" name="tele">輸入電話<br>
+		
+		<input type="text" name="companyname">輸入公司名稱<br>
+		
+		<input type="text" name="homeaddr">輸入居住地址<br>
+		<input type="submit" name="send" value="送出">
+	</form>
+	{% if name == "start" %}
+
+	{% else %}
+        	<p>輸入案件編號:{{casecompanynum}}</p>
+        	<p>輸入公司名稱:{{companyname}}</p>
+        	<p>輸入公司電話:{{tele}}</p>
+        	<p>輸入住家地址:{{homeaddr}}</p>
+        	<p>狀態:{{Output["Status"]}}</p>
+        	{% if Output != "沒有搜尋結果" %}
+            	<p>Monpa斷詞所得最高詞頻:{{Output["G_KeyWord"]["MonpaMaxWord"]}}</p>
+            	<p>Jieba斷詞所得最高詞頻:{{Output["G_KeyWord"]["JiebaMaxWord"]}}</p>
+            	{% for i in Output["Result"]: %}                              
+                　<li>
+                　{{i["Title"]}}:<br>
+                　<font color="#FF0000">Addr : </font>{{i["Addr"]}}<br>
+                　<font color="#FF0000">Type :</font>{{i["Type"]}}<br>
+                　<font color="#FF0000">Tele : </font>{{i["Tele"]}}
+                　</li>
+                {% endfor %}
+        	{% else %}
+            	<p>{{Output}}</p>
+            {% endif %}
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>API</title>
+</head>
+<body>
+    <p><a href="Company">2.黃頁搜尋</a></p>
+    <p><a href="https://b659ef6290ae.ngrok.io">3.GoogleMap搜尋</a></p>
+    <form method="post">
+        <input type="text" name="CaseTeleNum">輸入案件編號<br>
+		<input type="text" name="user">輸入電話<br>
+		<input type="submit" name="send" value="送出">
+	</form>
+	{% if MaxWord == "start" %}
+        
+
+    {% else %}
+        <p>案件編號:{{CaseNum}}</p>
+        <p>輸入:{{Input}}</p>
+        <p>狀態:{{Output["Status"]}}</p>
+        <table>
+        {% for i in Output["Result"]: %}                              
+        　<li>
+        　<a href={{i["Url"]}}>{{i["Title"]}}:</a><br>
+        　<font color="#FF0000">Context : </font>{{i["Content"]}}<br>
+        　<font color="#FF0000">{{i["NegList"]}}</font><br>
+        　
+        　</li>          
+        {% endfor %}
+        </table>
+        <p><a href="/{{FileName}}.json">{{FileName}}</a></p>
+    {% endif %}
+
+</body>
+</html>

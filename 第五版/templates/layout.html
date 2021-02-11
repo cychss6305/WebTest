@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Google API Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </head>
+  <body>
+  <form method="post">
+    <input type="text" id="App_Case_No" name="App_Case_No" placeholder="Input App_Case_No"><br>
+    <input type="text" id="Comp_Tel" name="Comp_Tel" placeholder="Input company tel number"><br>
+    <input type="text" id="query" name="query" placeholder="Search for company name"><br>
+    <input type="text" id="home" name="home" placeholder="Search for home address">
+    
+    <input type="submit" id="search" name="search" value="search">
+    
+   </form>
+  
+    <table>
+    {% if url %}
+        <p>您輸入 : {{App_Case_No}} 、{{Comp_Tel}}、 {{query}} 、 {{home}}</p>
+        {% if url != 'NULL' %}
+                {% if url |length == 1 %}
+                    {% for i in range(url[0] |length) %}                              
+                　       <p><a href={{url[0][i]}} id="url"  target="_blank">Click Company Map!</a></p>
+                    {% endfor %}
+                {% else %}
+                    <p><a href={{url}} id="url"  target="_blank">Click Company Map!</a></p>
+                {% endif %}
+                <p><a href="/{{json}}" id="json"  target="_blank">Click Json!</a></p>
+        {% else %}
+            <p>{{url}}</a></p>
+        {% endif %}
+        
+        {% for key,values in dict_name.items(): %}                              
+            　<li>{{key}}<br>{{values}}</li>          
+        {% endfor %}
+        
+    {% endif %}
+    </table>
+    
+    </body>
+</html>
+
+
+    <!-- -->
+    
