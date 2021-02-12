@@ -30,7 +30,6 @@ def API1(CaseNum,Tele,way):#參數:案件編號，輸入電話、爬蟲方式
         
     FinalResult=[]#整理負面字詞後，儲存最後的結果
     NegCheck=0
-    CutWay=0
     
     for index,i in enumerate(CrawResult):
         if type(i)==str:#如果搜尋出錯結果時的處理
@@ -40,8 +39,8 @@ def API1(CaseNum,Tele,way):#參數:案件編號，輸入電話、爬蟲方式
             for j in i:
                 NegList={}
                 WordsDict={}
-                WordsDict=APICut(j['Title'],CutWay,WordsDict,Tele)#對標題斷詞
-                WordsDict=APICut(j['Content'],CutWay,WordsDict,Tele)#對內文斷詞
+                WordsDict=APICut(j['Title'],WordsDict,Tele)#對標題斷詞
+                WordsDict=APICut(j['Content'],WordsDict,Tele)#對內文斷詞
                 for k in WordsDict:
                     if k in negative:
                         if NegList.get(k)==None:
@@ -169,18 +168,13 @@ def API2(CaseNum,InputName,InputTele,InputHomeAddr,way):#參數:案件編號、�
     else:#搜尋成功
         Status.append({"2Search":"Success"})
         JiebaWordsDict={}#儲存以jieba斷詞
-        MonpaWordsDict={}#儲存以monpa斷詞
-        Monpa,Jieba=0,1
         for i in SecondSearch:
-            MonpaWordsDict=APICut(i['Title'],Monpa,MonpaWordsDict,InputName)#對標題斷詞
-            MonpaWordsDict=APICut(i['Content'],Monpa,MonpaWordsDict,InputName)#對內文斷詞
             
-            JiebaWordsDict=APICut(i['Title'],Jieba,JiebaWordsDict,InputName)
-            JiebaWordsDict=APICut(i['Content'],Jieba,JiebaWordsDict,InputName)
+            JiebaWordsDict=APICut(i['Title'],JiebaWordsDict,InputName)
+            JiebaWordsDict=APICut(i['Content'],JiebaWordsDict,InputName)
             
         MaxJiebaWords=Dict2MaxList(JiebaWordsDict)#Dictionary轉成List，方便排序
-        MaxMonpaWords=Dict2MaxList(MonpaWordsDict)#Dictionary轉成List，方便排序
-        GKeyWord={"MonpaMaxWord":MaxMonpaWords,"JiebaMaxWord":MaxJiebaWords}
+        GKeyWord={"JiebaMaxWord":MaxJiebaWords}
 
     cost=datetime.datetime.now()-start #花費時間
     #最後回傳結果

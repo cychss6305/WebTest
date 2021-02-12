@@ -25,7 +25,6 @@
         	<p>輸入住家地址:{{homeaddr}}</p>
         	<p>狀態:{{Output["Status"]}}</p>
         	{% if Output != "沒有搜尋結果" %}
-            	<p>Monpa斷詞所得最高詞頻:{{Output["G_KeyWord"]["MonpaMaxWord"]}}</p>
             	<p>Jieba斷詞所得最高詞頻:{{Output["G_KeyWord"]["JiebaMaxWord"]}}</p>
             	{% for i in Output["Result"]: %}                              
                 　<li>

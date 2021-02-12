@@ -99,11 +99,9 @@ def Craw(Input,way):
             Data=Catch()
     return Data
 
-def APICut(Words,way,WordsDict,InputName):#要斷詞的字串、斷詞套件、斷詞後的存放地方、InputName為了跳脫出現在InputName的字詞
-    if way==0:#monpba斷詞，回傳為list
-        CutWords=monpa.cut(Words)
-    else:#jieba斷詞
-        CutWords=jieba.cut(Words)
+def APICut(Words,WordsDict,InputName):#要斷詞的字串、斷詞套件、斷詞後的存放地方、InputName為了跳脫出現在InputName的字詞
+
+    CutWords=jieba.cut(Words)
         
     for word in CutWords:
         if word not in NGWords and InputName.find(word)==-1:#跳過NGWord、出現在InputName的字詞
