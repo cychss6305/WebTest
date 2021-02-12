@@ -54,9 +54,10 @@ def API1(CaseNum,Tele,way):#參數:案件編號，輸入電話、爬蟲方式
                             
     cost=(str(datetime.datetime.now()-start))#總花費時間
     Output={"Status":Status,"App_Case_No":CaseNum,"Cust_Tel":Tele,"Result":FinalResult,"NEG_CHECK":NegCheck,"Cost":cost}#最後回傳結果
-    
+    '''
     with open("./log/"+CaseNum+" Google搜尋結果.json", 'w',encoding="utf-8") as outfile:
         json.dump(Output,outfile,ensure_ascii=False)
+    '''
     return Output
 
 def API2(CaseNum,InputName,InputTele,InputHomeAddr,way):#參數:案件編號、公司名稱、公司電話、居住地址，爬蟲方式
@@ -181,6 +182,8 @@ def API2(CaseNum,InputName,InputTele,InputHomeAddr,way):#參數:案件編號、�
     Output={"Status":Status,"App_Case_No":CaseNum,"Comp_Tel":InputTele,"Comp_Name":InputName,"Home_Addr":InputHomeAddr,
             "Result":FinalResult,"YP_Tel_Check":YPTeleCheck,"G_KeyWord":GKeyWord,"Cost":str(cost)}
     #存成json
+    '''
     with open("./log/"+CaseNum+" 黃頁搜尋結果.json", 'w',encoding="utf-8") as outfile:
             json.dump(Output, outfile,ensure_ascii=False)
+    '''
     return Output
